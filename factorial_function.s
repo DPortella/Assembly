@@ -1,4 +1,5 @@
 .globl factorial
+.type factorial, @function
 .section .text
 
 factorial:

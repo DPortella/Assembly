@@ -10,7 +10,6 @@ output:
 .section .text
 
 	.equ NUM_P, -8
-	.equ ITER_P, -16
 
 main:
 	push %rbp

@@ -29,9 +29,6 @@ iter:
 	movq $0, %rax
 	call fscanf
 
-#	cmpq $q, %rax
-#	jne .error_read
-
 	movq $debug, %rdi
 	movsbl ITER_P(%rbp), %esi
 	movq $0, %rax

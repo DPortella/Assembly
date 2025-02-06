@@ -17,39 +17,33 @@ iter:
 	movq %rsp, %rbp
 	subq $16, %rsp
 
+iter1:
+        movq stdout, %rdi
+        movq $prompt, %rsi
+        movq $0, %rax
+        call fprintf
 
-	movq stdout, %rdi
-	movq $prompt, %rsi
-	movq $0, %rax
-	call fprintf
+        movq stdin, %rdi
+        movq $scan, %rsi
+        leaq ITER_P(%rbp), %rdx
+        movq $0, %rax
+        call fscanf
 
-	movq stdin, %rdi
-	movq $scan, %rsi
-	leaq ITER_P(%rbp), %rdx
-	movq $0, %rax
-	call fscanf
-
-	movq $debug, %rdi
-	movsbl ITER_P(%rbp), %esi
-	movq $0, %rax
-	call printf
-
-	movb ITER_P(%rbp), %al
-	cmpb $'S', %al
-	je call_main
-	cmpb $'s', %al
-	je call_main
-	cmpb $'N', %al
-	je finish
-	cmpb $'n', %al
-	je finish
-	jmp iter
+        movb ITER_P(%rbp), %al
+        cmpb $'S', %al
+        je call_main
+        cmpb $'s', %al
+        je call_main
+        cmpb $'N', %al
+        je finish
+        cmpb $'n', %al
+        je finish
+        jmp iter1
 
 call_main:
-	call main
-
+        call main
 
 finish:
 
-	leave
-	ret
+        leave
+        ret
